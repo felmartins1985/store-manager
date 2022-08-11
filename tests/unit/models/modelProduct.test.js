@@ -86,3 +86,30 @@ describe('Ao testar a funcao GetById', () => {
       })
   })
 })
+describe('Model- Ao testar a funcao Create', () => {
+  const payload = 'O mundo fantastico de Guilherme';
+  before(async () => {
+    const query = [{ insertId: 1 }];
+    sinon.stub(connection, 'query').resolves(query);
+  })
+  after(async () => {
+    connection.query.restore();
+  })
+
+  describe('quando é inserido com sucesso', () => {
+
+    it('retorna um objeto', async () => {
+      const response = await ModelProduct.create(payload);
+
+      expect(response).to.be.a('object')
+    });
+
+    it('tal objeto possui o novo "id" e "name"', async () => {
+      const response = await ModelProduct.create(payload);
+      expect(response).to.have.a.property('id')
+            expect(response).to.have.a.property('name')
+    });
+
+
+  })
+})

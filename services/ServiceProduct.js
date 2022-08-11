@@ -1,4 +1,3 @@
-const Joi = require('joi');
 const ModelProduct = require('../models/ModelProduct');
 
 const getAll = async () => {
@@ -51,4 +50,4 @@ module.exports = {
   getAll,
   getById,
   create,
-};
+}; 

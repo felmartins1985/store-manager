@@ -92,7 +92,7 @@ describe('Controller-Ao testar a funcao getById', () => {
     const payload = {
       id: 1,
       name: 'Martelo de Thor',
-    }
+    } 
     before(() => {
       request.params = { id: 1 }
       response.status = sinon.stub()
@@ -109,6 +109,89 @@ describe('Controller-Ao testar a funcao getById', () => {
       await ControllerProduct.getById(request, response,next);
       expect(response.status.calledWith(200)).to.be.equal(true);
       expect(response.json.calledWith(payload)).to.be.equal(true);
+    })
+  })
+})
+describe('Controller-Ao testar a funcao create', () => {
+  describe('quando a funcao nao funciona', () => {
+    describe('quando o nome do produto nao esta preenchido', () => {
+      const response = {};
+      const request = {};
+      let next = () => { };
+      before(async () => {
+        request.body = {};
+        response.status = sinon.stub()
+          .returns(response);
+        response.json = sinon.stub()
+          .returns();
+        next = sinon.stub().returns();
+        sinon.stub(ServiceProduct, 'create').resolves({
+          error: {
+            code: 400,
+            message: '"name" is required',
+          },
+        })
+      })
+      after(() => {
+        ServiceProduct.create.restore();
+      })
+      it('quando e chamado o codigo 400', async () => {
+        await ControllerProduct.create(request, response, next);
+        expect(response.status.calledWith(400)).to.be.equal(true);
+        expect(response.json.calledWith({ message: '"name" is required' })).to.be.equal(true);
+      })
+    })
+    describe('quando o nome do produto tem menos de 5 caracter', () => {
+      const response = {};
+      const request = {};
+      let next = () => { };
+      before(async () => {
+        request.body = { name: 'abc' };
+        response.status = sinon.stub()
+          .returns(response);
+        response.json = sinon.stub()
+          .returns();
+        next = sinon.stub().returns();
+        sinon.stub(ServiceProduct, 'create').resolves({
+          error: {
+            code: 422,
+            message: '"name" length must be at least 5 characters long',
+          },
+        })
+      })
+      after(() => {
+        ServiceProduct.create.restore();
+      })
+      it('quando e chamado o codigo 400', async () => {
+        await ControllerProduct.create(request, response, next);
+        expect(response.status.calledWith(422)).to.be.equal(true);
+        expect(response.json.calledWith({ message: '"name" length must be at least 5 characters long' })).to.be.equal(true);
+      })
+    })
+  })
+  describe('quando a funcao funciona', () => {
+    const response = {};
+    const request = {};
+    let next = () => { };
+    before(async () => {
+      request.body = { name: 'O mundo fantastico de Guilherme' }
+      response.status = sinon.stub()
+        .returns(response);
+      response.json = sinon.stub()
+        .returns();
+      next = sinon.stub().returns();
+      sinon.stub(ServiceProduct, 'create').resolves({
+        id: 1,
+        name: 'O mundo fantastico de Guilherme',
+      })
+    })
+    after(async () => {
+      ServiceProduct.create.restore();
+    })
+    it('quando e chamado o codigo 201', async () => {
+      await ControllerProduct.create(request, response, next);
+      expect(response.status.calledWith(201)).to.be.equal(true);
+      expect(response.json.calledWith({ id: 1, name: 'O mundo fantastico de Guilherme' })).to.be.equal(true);
     })
   })
 })
