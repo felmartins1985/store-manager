@@ -4,7 +4,7 @@ const ServiceProduct = require('../services/ServiceProduct');
 const getAll = rescue(async (req, res) => {
   const products = await ServiceProduct.getAll();
   if (products.error) {
-    return { code: products.error.code, message: products.error.message };
+    return res.status(products.error.code).json({ message: products.error.message });
   }
   return res.status(200).json(products);
 });

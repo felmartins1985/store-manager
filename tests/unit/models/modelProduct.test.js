@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const connection = require('../../../models/connection');
 const ModelProduct = require('../../../models/ModelProduct');
 
-describe('Ao testar a funcao GetAll', () => {
+describe('Model- Ao testar a funcao GetAll', () => {
   describe('Quando a funcao esta invalida', () => {
       before(async () => {
       const query = [[]]
