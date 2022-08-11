@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const ModelProduct = require('../models/ModelProduct');
 
 const getAll = async () => {
@@ -27,10 +28,25 @@ const getById = async (id) => {
 };
 
 const create = async (name) => {
+  if (!name || name.length === 0) {
+    return {
+      error: {
+        code: 400,
+        message: '"name" is required',
+      },
+    };
+  }
+  if (name.length < 5) {
+    return {
+      error: {
+        code: 422,
+        message: '"name" length must be at least 5 characters long',
+      },
+    };
+   }
   const product = await ModelProduct.create(name);
   return product;
 };
-
 module.exports = {
   getAll,
   getById,

@@ -21,6 +21,9 @@ const getById = rescue(async (req, res) => {
 const create = rescue(async (req, res) => {
   const { name } = req.body;
   const product = await ServiceProduct.create(name);
+  if (product.error) {
+    return res.status(product.error.code).json({ message: product.error.message });
+  }
   res.status(201).json(product);
 });
 
