@@ -27,7 +27,7 @@ const getAll = async () => {
     return null;
   }
   return product;
-};
+}; 
 
 const getById = async (id) => {
   const query = `SELECT date,product_id AS productId, quantity
