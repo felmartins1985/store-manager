@@ -15,7 +15,7 @@ const createSaleProduct = async (itemsSold) => {
     id,
     itemsSold,
   };
-};
+}; 
 module.exports = {
   createSaleProduct,
 };

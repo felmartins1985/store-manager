@@ -38,7 +38,7 @@ describe('Service - Ao testar a funcao getAll', () => {
     it('retorna nao vazio', async () => {
       const response = await ServiceProduct.getAll();
       expect(response).to.not.be.empty;
-    })
+    }) 
     it('retorna com propriedades "id" e "name"', async () => {
       const response = await ServiceProduct.getAll();
       expect(response[0]).includes.all.keys('id', 'name');
