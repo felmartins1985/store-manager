@@ -11,6 +11,9 @@ app.get('/products', ControllerProduct.getAll);
 app.get('/products/:id', ControllerProduct.getById);
 app.post('/products', ControllerProduct.create);
 app.post('/sales', ControllerSale.createSaleProduct);
+app.get('/sales', ControllerSale.getAll);
+app.get('/sales/:id', ControllerSale.getById);
+
 // não altere esse arquivo, essa estrutura é necessária para à avaliação do projeto
 
 app.listen(process.env.PORT, () => {
