@@ -130,4 +130,67 @@ describe('Service-Ao testar a funcao create', () => {
     })
      })
    })
+//
+describe("Atualiza um produto pelo ID", () => {
+  describe("quando o name não passa na validacao", async () => {
+    it('Quando um name não é inserido', async () => {
+      const validaty = await ServiceProduct.putProductById(1);
+      expect(validaty).to.be.an("object");
+      expect(validaty).to.have.a.property("code");
+      expect(validaty.code).to.be.equal(400);
+    });
+    it("Quando o name não possui 5 caracteres", async () => {
+      const validaty = await ServiceProduct.putProductById(1, 'abc');
+      expect(validaty).to.be.an("object");
+      expect(validaty).to.have.a.property("code");
+      expect(validaty.code).to.be.equal(422);
+    });    
+  });
 
+  describe("quando é pesquisado em caso de erro", async () => {
+    before(async () => {
+      sinon
+        .stub(ModelProduct, "putProductById")
+        .resolves(null);
+    });
+
+    after(async () => {
+      ModelProduct.putProductById.restore();
+    });
+
+    it("deve retornar null", async () => {
+      const response = await ServiceProduct.putProductById(1, 'Joia do infinito');
+      expect(response).to.have.a.property("code");
+      expect(response).to.have.a.property("message");
+      expect(response.code).to.be.equal(404);
+    });
+  });
+
+  describe("quando é atualizado com sucesso", async () => {
+    const id = 1;
+    const name = "Martelo do Batman";
+    const products = [
+      [
+        {
+          id: 1,
+          name: "Martelo do Batman",
+        },
+      ],
+    ];
+    before(async () => {      
+      sinon.stub(ModelProduct, "putProductById").resolves(products);
+    });
+
+    after(async () => {
+      ModelProduct.putProductById.restore();
+    });
+
+    it("Retorna um objeto", async () => {
+      const response = await ServiceProduct.putProductById(id, name);
+      expect(response).to.be.an("array");
+      expect(response).to.not.be.empty;
+      expect(response[0][0].name).to.be.equal('Martelo do Batman');
+    });
+  });
+
+});

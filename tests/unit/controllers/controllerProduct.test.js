@@ -195,3 +195,55 @@ describe('Controller-Ao testar a funcao create', () => {
     })
   })
 })
+//
+describe("Atualizando um produto pelo id 'Controllers'", () => {
+  describe("quando o produto nao existe", async () => {
+    const req = {};
+    const res = {};
+    before(() => {
+      req.params = { id: 1 };
+      req.body = { name: "Joia do infinito" };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(ServiceProduct, "putProductById")
+        .resolves({ code: 404, message: "Product not found" });
+    });
+    after(() => {
+      ServiceProduct.putProductById.restore();
+    });
+
+    it("deve retornar null", async () => {
+      await ControllerProduct.putProductById(req, res);
+      expect(res.status.calledWith(404)).to.be.equal(true);
+      expect(res.json.calledWith({ message: "Product not found" })).to.be.equal(
+        true
+      );
+    });
+  });
+
+  describe("quando é atualizado com sucesso", async () => {
+    const products = {
+      id: 1,
+      name: "Joia do infinito",
+    };
+    const req = {};
+    const res = {};
+    before(() => {
+      req.params = { id: 1 };
+      req.body = { name: "Joia do infinito" };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon.stub(ServiceProduct, "putProductById").resolves(products);
+    });
+    after(() => {
+      ServiceProduct.putProductById.restore();
+    });
+
+    it("Retorna um produto atualizado", async () => {
+      await ControllerProduct.putProductById(req, res);
+      expect(res.status.calledWith(200)).to.be.equal(true);
+      expect(res.json.calledWith(products)).to.be.equal(true);
+    });
+  });
+});
