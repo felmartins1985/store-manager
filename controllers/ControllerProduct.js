@@ -38,5 +38,5 @@ module.exports = {
   getAll,
   getById,
   create,
-  putProductById
+  putProductById,
 };
