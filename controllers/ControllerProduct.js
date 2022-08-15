@@ -34,9 +34,22 @@ async function putProductById(req, res) {
   }
   return res.status(200).json(product);
 }
+const deleteProductById = rescue(async (req, res) => {
+  const { id } = req.params;
+  const product = await ServiceProduct.deleteProductById(id);
+  // console.log(product);
+  if (product.error) {
+    // console.log('teste');
+    return res.status(product.error.code).json({ message: product.error.message });
+  }
+  return res.status(204).json();
+});
+
+//
 module.exports = {
   getAll,
   getById,
   create,
   putProductById,
+  deleteProductById,
 };

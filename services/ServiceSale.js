@@ -21,7 +21,7 @@ const getAll = async () => {
   const products = await ModelSale.getAll();
   return products;
 };
-
+ 
 const getById = async (id) => {
   const product = await ModelSale.getById(id);
   if (!product) {
