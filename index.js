@@ -13,7 +13,7 @@ app.post('/products', ControllerProduct.create);
 app.post('/sales', ControllerSale.createSaleProduct);
 app.get('/sales', ControllerSale.getAll);
 app.get('/sales/:id', ControllerSale.getById);
-
+app.put('/products/:id', ControllerProduct.putProductById);
 // não altere esse arquivo, essa estrutura é necessária para à avaliação do projeto
 
 app.listen(process.env.PORT, () => {

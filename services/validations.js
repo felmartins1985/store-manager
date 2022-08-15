@@ -54,7 +54,19 @@ const validateQuantityAndProduct = async (itemsSold) => Promise
   const response3 = await validateIfIdExists(productId);
   if (response3.error) return response3;
 })).then((data) => data.find((item) => item));
+//
+function validatyName(name) {
+  if (!name || name === undefined) return { code: 400, message: '"name" is required' };
+  if (name.length < 5) { 
+    return {
+      code: 422,
+      message: '"name" length must be at least 5 characters long',
+    };
+  } 
+  return true;
+}
 
 module.exports = {
   validateQuantityAndProduct,
+  validatyName,
 };

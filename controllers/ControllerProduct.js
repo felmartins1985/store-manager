@@ -27,8 +27,16 @@ const create = rescue(async (req, res) => {
   res.status(201).json(product);
 });
 
+async function putProductById(req, res) {
+  const product = await ServiceProduct.putProductById(req.params.id, req.body.name);
+  if (product.message) {
+    return res.status(product.code).json({ message: product.message });
+  }
+  return res.status(200).json(product);
+}
 module.exports = {
   getAll,
   getById,
   create,
+  putProductById
 };
