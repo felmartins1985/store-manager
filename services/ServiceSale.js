@@ -46,7 +46,7 @@ const deleteSaleById = async (id) => {
   } 
   return {};
 }; 
-async function putSaleById(id, itemsSold) {
+const putSaleById = async (id, itemsSold) => {
 const validation = await Validations.validateQuantityAndProduct(itemsSold);
   // console.log(validation, 'service');
   if (validation !== undefined) {
@@ -66,7 +66,7 @@ const validation = await Validations.validateQuantityAndProduct(itemsSold);
   ); 
   return { saleId: id, itemsUpdated: itemsSold,
   };
-} 
+}; 
 module.exports = {
   createSaleProduct,
   getAll,

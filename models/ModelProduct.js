@@ -52,10 +52,22 @@ const deleteProductById = async (id) => {
   await connection.query('DELETE FROM StoreManager.products WHERE id = ?', [id]);
 };
 
+const searchByName = async (id) => {
+  const query = `
+    SELECT * FROM StoreManager.products
+    WHERE name LIKE ?`;
+  const searchId = `%${id}%`; 
+  const [product] = await connection.query(query, [searchId]);
+  if (!product || product.length === 0) {
+    return [];
+  }
+  return product;
+};
 module.exports = {
   getAll,
   getById,
   create,
   putProductById,
   deleteProductById,
+  searchByName,
 };

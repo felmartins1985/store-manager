@@ -45,6 +45,11 @@ const deleteProductById = rescue(async (req, res) => {
   return res.status(204).json();
 });
 
+const searchByName = rescue(async (req, res) => {
+  const { q } = req.query;
+  const product = await ServiceProduct.searchByName(q);
+  return res.status(200).json(product);
+ });
 //
 module.exports = {
   getAll,
@@ -52,4 +57,5 @@ module.exports = {
   create,
   putProductById,
   deleteProductById,
+  searchByName,
 };

@@ -68,10 +68,15 @@ const deleteProductById = async (id) => {
   } 
   return {};
 }; 
+const searchByName = async (id) => {
+  const product = await ModelProduct.searchByName(id);
+  return product;
+};
 module.exports = {
   getAll,
   getById,
   create,
   putProductById,
   deleteProductById,
+  searchByName,
 }; 

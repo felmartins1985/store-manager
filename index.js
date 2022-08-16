@@ -8,6 +8,7 @@ const ControllerSale = require('./controllers/ControllerSale');
 app.use(bodyParser.json());
 
 app.get('/products', ControllerProduct.getAll);
+app.get('/products/search', ControllerProduct.searchByName);
 app.get('/products/:id', ControllerProduct.getById);
 app.post('/products', ControllerProduct.create);
 app.post('/sales', ControllerSale.createSaleProduct);
@@ -17,6 +18,7 @@ app.put('/products/:id', ControllerProduct.putProductById);
 app.delete('/products/:id', ControllerProduct.deleteProductById);
 app.delete('/sales/:id', ControllerSale.deleteSaleById);
 app.put('/sales/:id', ControllerSale.putSaleById);
+
 // não altere esse arquivo, essa estrutura é necessária para à avaliação do projeto
 
 app.listen(process.env.PORT, () => {
