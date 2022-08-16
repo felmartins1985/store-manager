@@ -16,6 +16,7 @@ app.get('/sales/:id', ControllerSale.getById);
 app.put('/products/:id', ControllerProduct.putProductById);
 app.delete('/products/:id', ControllerProduct.deleteProductById);
 app.delete('/sales/:id', ControllerSale.deleteSaleById);
+app.put('/sales/:id', ControllerSale.putSaleById);
 // não altere esse arquivo, essa estrutura é necessária para à avaliação do projeto
 
 app.listen(process.env.PORT, () => {

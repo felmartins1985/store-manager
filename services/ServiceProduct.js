@@ -67,7 +67,7 @@ const deleteProductById = async (id) => {
     };
   } 
   return {};
-};
+}; 
 module.exports = {
   getAll,
   getById,

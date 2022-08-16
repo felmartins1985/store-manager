@@ -37,10 +37,17 @@ const deleteSaleById = rescue(async (req, res) => {
   }
   return res.status(204).json();
 });
-
+ async function putSaleById(req, res) {
+  const product = await ServiceSale.putSaleById(req.params.id, req.body);
+   if (product.error) {
+    return res.status(product.error.code).json({ message: product.error.message });
+  }
+  return res.status(200).json(product);
+} 
 module.exports = {
   createSaleProduct,
   getAll,
   getById,
   deleteSaleById,
+  putSaleById,
 };
