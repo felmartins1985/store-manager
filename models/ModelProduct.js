@@ -40,7 +40,7 @@ async function putProductById(id, name) {
   WHERE id = ?`, [name, id]);
   return { id, name };
 }
-
+ 
 const deleteProductById = async (id) => {
    const [product] = await connection.query(
     'SELECT * FROM StoreManager.products WHERE id = ?',

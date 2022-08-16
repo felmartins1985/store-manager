@@ -33,7 +33,7 @@ async function putProductById(req, res) {
     return res.status(product.code).json({ message: product.message });
   }
   return res.status(200).json(product);
-}
+} 
 const deleteProductById = rescue(async (req, res) => {
   const { id } = req.params;
   const product = await ServiceProduct.deleteProductById(id);

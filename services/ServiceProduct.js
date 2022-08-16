@@ -65,7 +65,7 @@ const deleteProductById = async (id) => {
         message: 'Product not found',
       },
     };
-  }
+  } 
   return {};
 };
 module.exports = {

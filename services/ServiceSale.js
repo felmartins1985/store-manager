@@ -10,7 +10,7 @@ const createSaleProduct = async (itemsSold) => {
     itemsSold.map(async (itemSold) => {
       await ModelSale.createSaleProduct(id, itemSold);
     }),
-  );
+  ); 
   return {
     id,
     itemsSold,
@@ -34,8 +34,21 @@ const getById = async (id) => {
   }
   return product;
 };
+const deleteSaleById = async (id) => {
+  const product = await ModelSale.deleteSaleById(id);
+  if (product === null) {
+    return {
+      error: {
+        code: 404,
+        message: 'Sale not found',
+      },
+    };
+  } 
+  return {};
+};
 module.exports = {
   createSaleProduct,
   getAll,
   getById,
+  deleteSaleById,
 };
