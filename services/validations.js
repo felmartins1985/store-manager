@@ -15,10 +15,9 @@ const validateQuantity = (quantity) => {
         code: 400,
         message: '"quantity" is required',
       },
-
     };
   }
-  return {};
+  return {};// <---
 };
 
 const validateProduct = (productId) => {
@@ -33,6 +32,7 @@ const validateProduct = (productId) => {
   }
   return {};
 };
+
 const validateIfIdExists = async (id) => {
   const product = await ModelProduct.getById(id);
   if (!product || product === undefined) {
@@ -45,6 +45,7 @@ const validateIfIdExists = async (id) => {
   }
   return {};
 }; 
+
 const validateQuantityAndProduct = async (itemsSold) => Promise
 .all(itemsSold.map(async ({ quantity, productId }) => {
   const response1 = validateQuantity(quantity);

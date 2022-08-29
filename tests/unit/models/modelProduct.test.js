@@ -52,7 +52,7 @@ describe('Ao testar a funcao GetById', () => {
       const query = [[]]
       sinon.stub(connection, 'query').resolves(query);
     })
-    after(() => {
+    after(async () => {
       connection.query.restore();
     })
     it('deve retornar null', async () => {
@@ -114,7 +114,7 @@ describe('Model- Ao testar a funcao Create', () => {
   })
 })
 //
-describe("Quando atualiza um producto pelo Id", () => {
+describe("Model-Quando atualiza um producto pelo Id", () => {
   describe("quando o produto atualizado não existe", async () => {
     before(async () => {
       const products = [[]];
@@ -159,3 +159,4 @@ describe("Quando atualiza um producto pelo Id", () => {
     });
   });
 });
+//

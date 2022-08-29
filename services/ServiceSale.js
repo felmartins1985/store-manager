@@ -64,7 +64,7 @@ const validation = await Validations.validateQuantityAndProduct(itemsSold);
       await ModelSale.putSaleById(id, itemSold);
     }),
   ); 
-  return { saleId: id, itemsUpdated: itemsSold,
+  return { saleId: id, itemsUpdated: itemsSold, // <---
   };
 }; 
 module.exports = {

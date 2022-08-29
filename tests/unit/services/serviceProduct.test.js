@@ -131,7 +131,7 @@ describe('Service-Ao testar a funcao create', () => {
      })
    })
 //
-describe("Atualiza um produto pelo ID", () => {
+describe("Service-Atualiza um produto pelo ID", () => {
   describe("quando o name não passa na validacao", async () => {
     it('Quando um name não é inserido', async () => {
       const validaty = await ServiceProduct.putProductById(1);
